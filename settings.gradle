@@ -1,4 +1,4 @@
-rootProject.name = 'discord-ipc"
+rootProject.name = 'discord-ipc'
 
 dependencyResolutionManagement {
 	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
