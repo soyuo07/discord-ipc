@@ -10,7 +10,8 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
+    sourceCompatibility = JavaVersion.VERSION_8
+    targetCompatibility = JavaVersion.VERSION_8
     withSourcesJar()
     withJavadocJar()
 }
