@@ -1,6 +1,5 @@
-package meteordevelopment.discordipc;
-
-import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RichPresence {
     private String details;
@@ -8,39 +7,18 @@ public class RichPresence {
 
     private Assets assets;
     private Timestamps timestamps;
+    private List<Button> buttons;
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setButtons(List<Button> buttons) {
+        this.buttons = buttons;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setLargeImage(String key, String text) {
-        if (assets == null) assets = new Assets();
-        assets.large_image = key;
-        assets.large_text = text;
-    }
-
-    public void setSmallImage(String key, String text) {
-        if (assets == null) assets = new Assets();
-        assets.small_image = key;
-        assets.small_text = text;
-    }
-
-    public void setStart(long time) {
-        if (timestamps == null) timestamps = new Timestamps();
-        timestamps.start = time;
-    }
-
-    public void setEnd(long time) {
-        if (timestamps == null) timestamps = new Timestamps();
-        timestamps.end = time;
+    public void addButton(String label, String url) {
+        if (buttons == null) buttons = new ArrayList<>();
+        buttons.add(new Button(label, url));
     }
 
     public JsonObject toJson() {
-        // Main
         JsonObject o = new JsonObject();
 
         if (details != null) o.addProperty("details", details);
@@ -49,23 +27,31 @@ public class RichPresence {
         // Assets
         if (assets != null) {
             JsonObject a = new JsonObject();
-
             if (assets.large_image != null) a.addProperty("large_image", assets.large_image);
             if (assets.large_text != null) a.addProperty("large_text", assets.large_text);
             if (assets.small_image != null) a.addProperty("small_image", assets.small_image);
             if (assets.small_text != null) a.addProperty("small_text", assets.small_text);
-
             o.add("assets", a);
         }
 
         // Timestamps
         if (timestamps != null) {
             JsonObject t = new JsonObject();
-
             if (timestamps.start != null) t.addProperty("start", timestamps.start);
             if (timestamps.end != null) t.addProperty("end", timestamps.end);
-
             o.add("timestamps", t);
+        }
+
+        // Buttons
+        if (buttons != null && !buttons.isEmpty()) {
+            com.google.gson.JsonArray arr = new com.google.gson.JsonArray();
+            for (Button b : buttons) {
+                JsonObject btn = new JsonObject();
+                btn.addProperty("label", b.label);
+                btn.addProperty("url", b.url);
+                arr.add(btn);
+            }
+            o.add("buttons", arr);
         }
 
         return o;
@@ -79,5 +65,15 @@ public class RichPresence {
     public static class Timestamps {
         public Long start;
         public Long end;
+    }
+
+    public static class Button {
+        public String label;
+        public String url;
+
+        public Button(String label, String url) {
+            this.label = label;
+            this.url = url;
+        }
     }
 }
