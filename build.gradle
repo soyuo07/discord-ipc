@@ -6,7 +6,7 @@ group = "com.github.soyuo07"
 version = "1.2"
 
 dependencies {
-    implementation "com.google.code.gson:gson:2.10.1"
+    implementation "com.google.code.gson:gson:2.8.9"
 }
 
 java {
