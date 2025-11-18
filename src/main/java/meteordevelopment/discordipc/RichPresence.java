@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gson.JsonObject;
 
 public class RichPresence {
     private String details;
