@@ -5,21 +5,12 @@ plugins {
 group = "com.github.soyuo07"
 version = "1.2"
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation "com.google.code.gson:gson:2.8.9"
 }
 
 java {
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
-
     withSourcesJar()
     withJavadocJar()
-}
-
-javadoc {
-    options.addStringOption('Xdoclint:none', '-quiet')
 }
