@@ -1,17 +1,16 @@
 plugins {
     id "java"
-    id "maven-publish"
 }
 
-group "meteordevelopment"
-version "1.1"
+group = "com.github.soyuo07"
+version = "1.2"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compileOnly "com.google.code.gson:gson:2.8.9"
+    implementation "com.google.code.gson:gson:2.8.9"
 }
 
 java {
@@ -23,28 +22,4 @@ java {
 
 javadoc {
     options.addStringOption('Xdoclint:none', '-quiet')
-}
-
-publishing {
-    publications {
-        java(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            name = "meteor-maven"
-            url = "https://maven.meteordev.org/releases"
-
-            credentials {
-                username = System.getenv("MAVEN_METEOR_ALIAS")
-                password = System.getenv("MAVEN_METEOR_TOKEN")
-            }
-
-            authentication {
-                basic(BasicAuthentication)
-            }
-        }
-    }
 }
