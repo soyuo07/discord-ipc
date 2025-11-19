@@ -43,9 +43,8 @@ public class RichPresence {
         timestamps.end = time;
     }
 
-    public void addButton(String label, String url) {
-        if (buttons == null) buttons = new ArrayList<>();
-        buttons.add(new Button(label, url));
+    public void setButtons(List<Button> buttons) {
+        this.buttons = buttons;
     }
 
     public JsonObject toJson() {
@@ -54,29 +53,22 @@ public class RichPresence {
         if (details != null) o.addProperty("details", details);
         if (state != null) o.addProperty("state", state);
 
-        // Assets
         if (assets != null) {
             JsonObject a = new JsonObject();
-
             if (assets.large_image != null) a.addProperty("large_image", assets.large_image);
             if (assets.large_text != null) a.addProperty("large_text", assets.large_text);
             if (assets.small_image != null) a.addProperty("small_image", assets.small_image);
             if (assets.small_text != null) a.addProperty("small_text", assets.small_text);
-
             o.add("assets", a);
         }
 
-        // Timestamps
         if (timestamps != null) {
             JsonObject t = new JsonObject();
-
             if (timestamps.start != null) t.addProperty("start", timestamps.start);
             if (timestamps.end != null) t.addProperty("end", timestamps.end);
-
             o.add("timestamps", t);
         }
 
-        // Buttons
         if (buttons != null && !buttons.isEmpty()) {
             JsonArray arr = new JsonArray();
             for (Button b : buttons) {
