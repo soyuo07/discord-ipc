@@ -43,8 +43,18 @@ public class RichPresence {
         timestamps.end = time;
     }
 
-    public void setButtons(List<Button> buttons) {
-        this.buttons = buttons;
+    public void setButtons(List<List<String>> buttonData) {
+        this.buttons = new ArrayList<>();
+        for (List<String> data : buttonData) {
+            if (data != null && data.size() >= 2) {
+                this.buttons.add(new Button(data.get(0), data.get(1)));
+            }
+        }
+    }
+
+    public void addButton(String label, String url) {
+        if (buttons == null) buttons = new ArrayList<>();
+        buttons.add(new Button(label, url));
     }
 
     public JsonObject toJson() {
