@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation "meteordevelopment:discord-ipc:1.0"
+    implementation "com.github.soyuo07:discord-ipc:v1.2.11"
     implementation "com.google.code.gson:gson:2.8.9" // GSON is not included but required
 }
 ```
